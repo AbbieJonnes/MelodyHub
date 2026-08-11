@@ -1,11 +1,13 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-import cairosvg
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM
 from io import BytesIO
 import os
 
 
 # ---------- COLORS ----------
+
 BG_COLOR = "#0D0D0D"
 CARD_COLOR = "#181818"
 SECONDARY_COLOR = "#242424"
@@ -15,34 +17,84 @@ ACCENT_COLOR = "#1DB954"
 
 
 # ---------- LOAD SVG ICON ----------
-def load_icon(filename, size=(24, 24)):
-    path = os.path.join("assets", "icons", filename)
 
-    png_data = cairosvg.svg2png(
-        url=path,
-        output_width=size[0],
-        output_height=size[1]
+def load_icon(filename, size=(24, 24)):
+    # Get the folder where this ui.py file is located
+    project_folder = os.path.dirname(os.path.abspath(__file__))
+
+    # Build the full path to the icon
+    path = os.path.join(
+        project_folder,
+        "assets",
+        "icons",
+        filename
     )
 
-    image = Image.open(BytesIO(png_data))
+    # Check that the icon exists
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            f"Icon not found: {path}"
+        )
+
+    # Read the SVG file
+    drawing = svg2rlg(path)
+
+    if drawing is None:
+        raise ValueError(
+            f"Could not read SVG file: {path}"
+        )
+
+    # Convert SVG to PNG
+    png_data = renderPM.drawToString(
+        drawing,
+        fmt="PNG"
+    )
+
+    # Open the PNG with Pillow
+    image = Image.open(
+        BytesIO(png_data)
+    )
+
+    # Resize the icon
+    image = image.resize(
+        size,
+        Image.Resampling.LANCZOS
+    )
+
+    # Convert it to a Tkinter-compatible image
     return ImageTk.PhotoImage(image)
 
 
 # ---------- HOME PAGE ----------
+
 def create_home_page(window):
 
     # Window background
-    window.configure(bg=BG_COLOR)
+    window.configure(
+        bg=BG_COLOR
+    )
 
     # Load Font Awesome icons
-    home_icon = load_icon("home.svg", (22, 22))
-    music_icon = load_icon("music.svg", (22, 22))
-    search_icon = load_icon("search-dollar.svg", (22, 22))
+    home_icon = load_icon(
+        "home.svg",
+        (22, 22)
+    )
+
+    music_icon = load_icon(
+        "music.svg",
+        (22, 22)
+    )
+
+    search_icon = load_icon(
+        "search-dollar.svg",
+        (22, 22)
+    )
 
     # Keep icons alive
     window.home_icon = home_icon
     window.music_icon = music_icon
     window.search_icon = search_icon
+
 
     # ==================================================
     # NAVIGATION BAR
@@ -59,7 +111,9 @@ def create_home_page(window):
         side="top"
     )
 
-    # Logo / App name
+
+    # ---------- LOGO ----------
+
     logo = tk.Label(
         navbar,
         text="MelodyHub",
@@ -73,7 +127,9 @@ def create_home_page(window):
         padx=30
     )
 
-    # Home button
+
+    # ---------- HOME BUTTON ----------
+
     nav_home = tk.Button(
         navbar,
         image=home_icon,
@@ -93,7 +149,9 @@ def create_home_page(window):
         padx=15
     )
 
-    # My Music button
+
+    # ---------- MY MUSIC BUTTON ----------
+
     nav_music = tk.Button(
         navbar,
         image=music_icon,
@@ -113,6 +171,7 @@ def create_home_page(window):
         padx=15
     )
 
+
     # ==================================================
     # HERO SECTION
     # ==================================================
@@ -127,11 +186,13 @@ def create_home_page(window):
         expand=True
     )
 
-    # Main heading
+
+    # ---------- MAIN HEADING ----------
+
     heading = tk.Label(
         hero,
         text="Your Music.\nYour World.",
-        font=("Arial", 40, "bold"),
+        font=("Arial", 50, "bold"),
         bg=BG_COLOR,
         fg=TEXT_COLOR,
         justify="center"
@@ -141,10 +202,15 @@ def create_home_page(window):
         pady=(80, 10)
     )
 
-    # Description
+
+    # ---------- DESCRIPTION ----------
+
     description = tk.Label(
         hero,
-        text="Discover music, save your favorites,\nand build your own personal music collection.",
+        text=(
+            "Discover music, save your favorites,\n"
+            "and build your own personal music collection."
+        ),
         font=("Arial", 14),
         bg=BG_COLOR,
         fg=MUTED_COLOR,
@@ -154,6 +220,7 @@ def create_home_page(window):
     description.pack(
         pady=10
     )
+
 
     # ==================================================
     # SEARCH SECTION
@@ -170,7 +237,9 @@ def create_home_page(window):
         pady=30
     )
 
-    # Search icon
+
+    # ---------- SEARCH ICON ----------
+
     search_icon_label = tk.Label(
         search_container,
         image=search_icon,
@@ -182,7 +251,9 @@ def create_home_page(window):
         padx=(5, 8)
     )
 
-    # Search box
+
+    # ---------- SEARCH BOX ----------
+
     search_entry = tk.Entry(
         search_container,
         width=35,
@@ -198,7 +269,9 @@ def create_home_page(window):
         ipady=8
     )
 
-    # Search button
+
+    # ---------- SEARCH BUTTON ----------
+
     search_button = tk.Button(
         search_container,
         text="Search",
@@ -218,6 +291,7 @@ def create_home_page(window):
         padx=(10, 0)
     )
 
+
     # ==================================================
     # FEATURE CARDS
     # ==================================================
@@ -231,12 +305,14 @@ def create_home_page(window):
         pady=20
     )
 
-    # Card 1 - Discover Music
+
+    # ---------- DISCOVER MUSIC CARD ----------
+
     search_card = tk.Frame(
         features,
         bg=CARD_COLOR,
         width=220,
-        height=100
+        height=110
     )
 
     search_card.pack(
@@ -262,12 +338,14 @@ def create_home_page(window):
         fg=TEXT_COLOR
     ).pack()
 
-    # Card 2 - My Music
+
+    # ---------- MY MUSIC CARD ----------
+
     music_card = tk.Frame(
         features,
         bg=CARD_COLOR,
         width=220,
-        height=100
+        height=110
     )
 
     music_card.pack(
@@ -293,12 +371,14 @@ def create_home_page(window):
         fg=TEXT_COLOR
     ).pack()
 
-    # Card 3 - Favorites
+
+    # ---------- FAVORITES CARD ----------
+
     favorites_card = tk.Frame(
         features,
         bg=CARD_COLOR,
         width=220,
-        height=100
+        height=110
     )
 
     favorites_card.pack(
@@ -325,6 +405,7 @@ def create_home_page(window):
         bg=CARD_COLOR,
         fg=TEXT_COLOR
     ).pack()
+
 
     # ==================================================
     # FOOTER
