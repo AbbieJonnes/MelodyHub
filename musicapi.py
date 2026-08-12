@@ -1,31 +1,44 @@
 import requests
 
 
+# iTunes Music API
+API_URL = "https://itunes.apple.com/search"
+
+
 def search_music(term):
-    url = "https://itunes.apple.com/search"
+    """
+    Search for music using the iTunes Search API.
+
+    Args:
+        term: The song, artist, or music keyword to search for.
+
+    Returns:
+        A list of music results.
+    """
+
+    # Don't search if nothing was entered
+    if not term or not term.strip():
+        return []
 
     params = {
-        "term": term,
+        "term": term.strip(),
         "country": "KE",
         "media": "music",
         "limit": 10
     }
 
-    response = requests.get(url, params=params)
+    # Send request to the real API
+    response = requests.get(
+        API_URL,
+        params=params,
+        timeout=10
+    )
+
+    # Raise an error if the API request failed
+    response.raise_for_status()
+
+    # Convert API response from JSON to Python dictionary
     data = response.json()
 
-    songs = []
-
-    for item in data["results"]:
-        song = {
-            "title": item.get("trackName"),
-            "artist": item.get("artistName"),
-            "album": item.get("collectionName"),
-            "artwork": item.get("artworkUrl100"),
-            "preview": item.get("previewUrl"),
-            "track_url": item.get("trackViewUrl")
-        }
-
-        songs.append(song)
-
-    return songs
+    # Return only the songs
+    return data.get("results", [])
