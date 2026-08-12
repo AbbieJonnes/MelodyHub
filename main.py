@@ -1,17 +1,23 @@
 import tkinter as tk
+
+from database import initialize_database
 from ui import create_home_page
+
+
+# Initialize the database
+initialize_database()
 
 
 # Create the main application window
 window = tk.Tk()
 
-# Window settings
 window.title("MelodyHub")
-window.geometry("1200x800")
-window.minsize(1000, 700)
+window.geometry("1000x700")
+window.minsize(900, 600)
 
-# Create the landing page
+# Create the home page
 create_home_page(window)
 
-# Keep the application running
+
+# Start the Tkinter application
 window.mainloop()
