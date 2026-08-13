@@ -4,11 +4,7 @@ import sqlite3
 # Database file
 DATABASE_NAME = "melodyhub.db"
 
-
-# ==================================================
 # DATABASE CONNECTION
-# ==================================================
-
 def get_connection():
     """
     Create and return a connection to the SQLite database.
@@ -16,9 +12,8 @@ def get_connection():
     return sqlite3.connect(DATABASE_NAME)
 
 
-# ==================================================
+
 # CREATE TABLE
-# ==================================================
 
 def initialize_database():
     """
@@ -45,9 +40,7 @@ def initialize_database():
     connection.close()
 
 
-# ==================================================
 # ADD SONG
-# ==================================================
 
 def add_song(
     title,
@@ -83,9 +76,7 @@ def add_song(
     connection.close()
 
 
-# ==================================================
 # GET ALL SONGS
-# ==================================================
 
 def get_all_songs():
     """
@@ -108,9 +99,7 @@ def get_all_songs():
     return songs
 
 
-# ==================================================
 # GET FAVORITES
-# ==================================================
 
 def get_favorites():
     """
@@ -134,9 +123,7 @@ def get_favorites():
     return favorites
 
 
-# ==================================================
 # GET ONE SONG
-# ==================================================
 
 def get_song(song_id):
     """
@@ -159,9 +146,7 @@ def get_song(song_id):
     return song
 
 
-# ==================================================
 # UPDATE SONG
-# ==================================================
 
 def update_song(
     song_id,
@@ -203,9 +188,7 @@ def update_song(
     connection.close()
 
 
-# ==================================================
 # TOGGLE FAVORITE
-# ==================================================
 
 def toggle_favorite(song_id):
     """
@@ -229,9 +212,7 @@ def toggle_favorite(song_id):
     connection.close()
 
 
-# ==================================================
 # DELETE SONG
-# ==================================================
 
 def delete_song(song_id):
     """
@@ -250,9 +231,7 @@ def delete_song(song_id):
     connection.close()
 
 
-# ==================================================
 # CHECK IF SONG EXISTS
-# ==================================================
 
 def song_exists(track_id):
     """
