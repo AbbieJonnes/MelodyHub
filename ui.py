@@ -21,9 +21,7 @@ from database import (
 )
 
 
-# ==================================================
 # COLORS
-# ==================================================
 
 BG_COLOR = "#0D0D0D"
 CARD_COLOR = "#181818"
@@ -33,9 +31,7 @@ MUTED_COLOR = "#A7A7A7"
 ACCENT_COLOR = "#1DB954"
 
 
-# ==================================================
 # LOAD SVG ICON
-# ==================================================
 
 def load_icon(filename, size=(24, 24)):
     """
@@ -83,17 +79,13 @@ def load_icon(filename, size=(24, 24)):
     return ImageTk.PhotoImage(image)
 
 
-# ==================================================
 # MAIN HOME PAGE
-# ==================================================
 
 def create_home_page(window):
 
     window.configure(bg=BG_COLOR)
 
-    # ------------------------------------------------
     # LOAD ICONS
-    # ------------------------------------------------
 
     home_icon = load_icon(
         "home.svg",
@@ -115,9 +107,8 @@ def create_home_page(window):
     window.music_icon = music_icon
     window.search_icon = search_icon
 
-    # ------------------------------------------------
+
     # MAIN CONTENT CONTAINER
-    # ------------------------------------------------
 
     content = tk.Frame(
         window,
@@ -132,9 +123,7 @@ def create_home_page(window):
     # Store reference
     window.main_content = content
 
-    # ------------------------------------------------
     # NAVIGATION BAR
-    # ------------------------------------------------
 
     navbar = tk.Frame(
         window,
@@ -206,7 +195,7 @@ def create_home_page(window):
     # Favorites
     nav_favorites = tk.Button(
         navbar,
-        text="  ♥ Favorites",
+        text="  Favorites",
         font=("Arial", 11, "bold"),
         bg="#080808",
         fg=TEXT_COLOR,
@@ -222,9 +211,8 @@ def create_home_page(window):
         padx=15
     )
 
-    # ------------------------------------------------
+
     # FOOTER
-    # ------------------------------------------------
 
     footer = tk.Label(
         window,
@@ -246,9 +234,7 @@ def create_home_page(window):
     show_home(window)
 
 
-# ==================================================
 # CLEAR MAIN CONTENT
-# ==================================================
 
 def clear_content(window):
 
@@ -256,9 +242,7 @@ def clear_content(window):
         widget.destroy()
 
 
-# ==================================================
 # HOME SCREEN
-# ==================================================
 
 def show_home(window):
 
@@ -308,9 +292,7 @@ def show_home(window):
         pady=10
     )
 
-    # ------------------------------------------------
     # SEARCH BAR
-    # ------------------------------------------------
 
     search_container = tk.Frame(
         hero,
@@ -381,9 +363,8 @@ def show_home(window):
         )
     )
 
-    # ------------------------------------------------
+
     # FEATURE CARDS
-    # ------------------------------------------------
 
     features = tk.Frame(
         hero,
@@ -473,7 +454,7 @@ def show_home(window):
 
     tk.Label(
         favorites_card,
-        text="♥",
+        text="favorites",
         font=("Arial", 25),
         bg=CARD_COLOR,
         fg=ACCENT_COLOR
@@ -490,9 +471,7 @@ def show_home(window):
     ).pack()
 
 
-# ==================================================
 # SEARCH MUSIC
-# ==================================================
 
 def perform_search(window, term):
 
@@ -523,9 +502,7 @@ def perform_search(window, term):
         )
 
 
-# ==================================================
 # SEARCH RESULTS
-# ==================================================
 
 def show_search_results(window, results, term):
 
@@ -561,7 +538,7 @@ def show_search_results(window, results, term):
     # Back button
     tk.Button(
         content,
-        text="← Back Home",
+        text=" Back Home",
         font=("Arial", 10, "bold"),
         bg=SECONDARY_COLOR,
         fg=TEXT_COLOR,
@@ -643,9 +620,7 @@ def show_search_results(window, results, term):
         )
 
 
-# ==================================================
 # API SONG CARD
-# ==================================================
 
 def create_api_song_card(parent, song):
 
@@ -729,7 +704,7 @@ def create_api_song_card(parent, song):
 
         tk.Button(
             buttons,
-            text="▶ Preview",
+            text=" Preview",
             font=("Arial", 9, "bold"),
             bg=SECONDARY_COLOR,
             fg=TEXT_COLOR,
@@ -748,7 +723,7 @@ def create_api_song_card(parent, song):
 
     tk.Button(
         buttons,
-        text="♥ Favorite",
+        text="Favorite",
         font=("Arial", 9, "bold"),
         bg=ACCENT_COLOR,
         fg="white",
@@ -766,9 +741,7 @@ def create_api_song_card(parent, song):
     )
 
 
-# ==================================================
 # SAVE API SONG AS FAVORITE
-# ==================================================
 
 def save_api_favorite(song):
 
@@ -816,9 +789,7 @@ def save_api_favorite(song):
     )
 
 
-# ==================================================
 # PLAY PREVIEW
-# ==================================================
 
 def play_preview(url):
 
@@ -842,10 +813,7 @@ def play_preview(url):
             str(error)
         )
 
-
-# ==================================================
 # MY MUSIC
-# ==================================================
 
 def show_my_music(window):
 
@@ -974,10 +942,7 @@ def show_my_music(window):
         )
 
 
-# ==================================================
 # DATABASE SONG CARD
-# ==================================================
-
 def create_database_song_card(parent, song, window):
 
     song_id = song[0]
@@ -1121,9 +1086,7 @@ def create_database_song_card(parent, song, window):
     )
 
 
-# ==================================================
 # FAVORITE DATABASE SONG
-# ==================================================
 
 def favorite_database_song(window, song_id):
 
@@ -1132,9 +1095,7 @@ def favorite_database_song(window, song_id):
     show_my_music(window)
 
 
-# ==================================================
 # FAVORITES PAGE
-# ==================================================
 
 def show_favorites(window):
 
@@ -1198,9 +1159,7 @@ def show_favorites(window):
         )
 
 
-# ==================================================
 # ADD SONG PAGE
-# ==================================================
 
 def show_add_song(window):
 
@@ -1292,9 +1251,7 @@ def show_add_song(window):
     )
 
 
-# ==================================================
 # FORM FIELD
-# ==================================================
 
 def create_form_field(parent, label_text):
 
@@ -1326,9 +1283,7 @@ def create_form_field(parent, label_text):
     return entry
 
 
-# ==================================================
 # SAVE MANUAL SONG
-# ==================================================
 
 def save_manual_song(
     window,
@@ -1368,9 +1323,7 @@ def save_manual_song(
     show_my_music(window)
 
 
-# ==================================================
 # EDIT SONG
-# ==================================================
 
 def show_edit_song(window, song_id):
 
@@ -1489,9 +1442,7 @@ def show_edit_song(window, song_id):
     )
 
 
-# ==================================================
 # SAVE EDIT
-# ==================================================
 
 def save_edit(
     window,
@@ -1537,9 +1488,7 @@ def save_edit(
     show_my_music(window)
 
 
-# ==================================================
 # DELETE CONFIRMATION
-# ==================================================
 
 def confirm_delete(window, song_id):
 
