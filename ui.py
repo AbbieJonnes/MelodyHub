@@ -23,12 +23,20 @@ from database import (
 
 # COLORS
 
-BG_COLOR = "#0D0D0D"
-CARD_COLOR = "#181818"
-SECONDARY_COLOR = "#242424"
-TEXT_COLOR = "#FFFFFF"
-MUTED_COLOR = "#A7A7A7"
-ACCENT_COLOR = "#1DB954"
+# BG_COLOR = "#0D0D0D"
+# CARD_COLOR = "#181818"
+# SECONDARY_COLOR = "#242424"
+# TEXT_COLOR = "#FFFFFF"
+# MUTED_COLOR = "#A7A7A7"
+# ACCENT_COLOR = "#1DB954"
+
+BG_COLOR = "#ED0DDE"          # soft blush pink
+CARD_COLOR = "#FFFFFF"        # white cards
+SECONDARY_COLOR = "#FCE4EC"   # light pink
+TEXT_COLOR = "#2B1B1F"        # dark wine/brown
+MUTED_COLOR = "#555555"       # muted pink-gray
+ACCENT_COLOR = "#C89B3C"      # elegant gold
+NAV_COLOR = "#10F0DE"         # dusty pink
 
 
 # LOAD SVG ICON
