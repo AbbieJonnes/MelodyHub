@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox #pop-up messages
 
 from PIL import Image, ImageTk
 from svglib.svglib import svg2rlg
@@ -232,7 +232,7 @@ def create_home_page(window):
 
     footer.pack(
         fill="x",
-        side="bottom",
+        side="bottom",   
         pady=10
     )
 
