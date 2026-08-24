@@ -1,8 +1,8 @@
-MelodyHub
+# MelodyHub
 
 MelodyHub is a desktop music application built with Python and Tkinter. It allows users to discover music, view song information, save songs, manage favorites, and store song data locally using SQLite.
 
-Features
+## Features
 
 Browse and search for songs
 
@@ -24,7 +24,7 @@ Store song information using SQLite
 
 Desktop graphical user interface built with Tkinter
 
-Technologies Used
+## Technologies Used
 
 Python
 
@@ -52,7 +52,7 @@ MelodyHub/
 ├── utils.py
 └── melodyhub.db
 
-Database
+## Database
 
 MelodyHub uses SQLite to store song information locally.
 
@@ -92,15 +92,15 @@ Activate the virtual environment on Windows using Git Bash:
 
 source myenv/Scripts/activate
 
-Install the required dependencies:
+## Install the required dependencies:
 
 pip install -r requirements.txt
 
-Run the application:
+## Run the application:
 
 python main.py
 
-Author
+## Author
 
 Abigael Mwangi
 
@@ -108,6 +108,6 @@ Email: abigaelmwangi534@gmail.com
 
 GitHub: Abbie Jonnes
 
-License
+## License
 
 This project is licensed under the MIT License.
