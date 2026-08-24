@@ -1,5 +1,5 @@
 class Song:
-    def __init__(
+    def __init__(  #init runs automatically when you add a new song
         self,
         title,
         artist,
