@@ -21,7 +21,7 @@ def initialize_database():
     """
 
     connection = get_connection()
-    cursor = connection.cursor()
+    cursor = connection.cursor()  #give cmds to db
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS songs (
@@ -61,7 +61,8 @@ def add_song(
     cursor.execute("""
         INSERT INTO songs
         (title, artist, album, artwork, preview_url, track_id, favorite)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+
     """, (
         title,
         artist,
